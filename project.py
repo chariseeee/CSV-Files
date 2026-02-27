@@ -88,11 +88,25 @@ def add_item():
 
 
 # VIEW INVENTORY
+red = "\033[0;31m" # ASNI colors
+default = "\033[0m"
+
 def view_inventory():
 
     if not system:
         print("Inventory empty.")
         return
+
+    # HEADERS
+    print(red + f"{'Item Name':<30}{'Category':<25}"
+          f"{'Quantity':<12}{'Unit Price':<15}{'Reorder Level':<15}" + default)
+    print("_" * 100)
+
+    # KEY VALUES
+    for name, data in system.items():
+        print(f"{name:<30}{data['Category']:<25}"
+              f"{data['Quantity']:<12}{data['Unit Price']:<15}{data['Reorder Level']:<15}")
+
 
     print("""
 Enter your choice:
@@ -117,9 +131,9 @@ Enter your choice:
     table = sorting[choice]
 
     print(f"\n{table.upper()}") # \n means proceed to next code bago print
-    print("-" * 50 ) # multiply dash
+    print("_" * 50 ) # multiply dash
 
-    for name, data in system.items():
+    for name, data in system.items(): # outline ng table
         print(f"{name}: {data[table]}") 
 
 # UPDATE STOCK
@@ -158,7 +172,7 @@ def filter_option():
 
 def view_stock_by_category():
     category = input("Enter category: ").lower()
-    check = False
+    check = False # boolean variable t/f
 
     for name, data in system.items():
         if data["Category"].lower() == category:
