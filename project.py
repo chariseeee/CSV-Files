@@ -139,7 +139,23 @@ def update_stock():
         print(f"LOW STOCK ALERT: {name} is below reorder level!")
 
 
-# FILTER CATEGORY
+# FILTER CATEGORY / LOW STOCK
+def filter_option():
+    print("""
+    1. Filter by Category
+    2. Filter by Low Stock
+    """)
+
+    option = input("Enter choice: ").strip()
+
+
+    if option == "1":
+        view_stock_by_category()
+    elif option == "2":
+        view_stock_to_reorder()
+    else:
+        print("Invalid choice.")
+
 def view_stock_by_category():
     category = input("Enter category: ").lower()
     check = False
@@ -188,11 +204,10 @@ while True:
 1. Add New Item
 2. View Inventory
 3. Update Stock
-4. Filter by Category
-5. Filter Stock to Reorder
-6. Save to CSV
-7. Load from CSV
-8. Exit
+4. Filter by Category / Low Stock
+5. Save to CSV
+6. Load from CSV
+7. Exit
 """ + default)
 
     choice = input("Enter choice: ")
@@ -204,14 +219,12 @@ while True:
     elif choice == "3":
         update_stock()
     elif choice == "4":
-        view_stock_by_category()
+        filter_option()
     elif choice == "5":
-        view_stock_to_reorder()
-    elif choice == "6":
         save_to_csv()
-    elif choice == "7":
+    elif choice == "6":
         load_from_csv()
-    elif choice == "8":
+    elif choice == "7":
         exit_program()
         break
     else:
