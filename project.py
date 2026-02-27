@@ -172,15 +172,26 @@ def filter_option():
         print("Invalid choice.")
 
 def view_stock_by_category():
-    category = input("Enter category: ").lower()
-    check = False # boolean variable t/f
+    if not system:
+        print("Inventory empty.")
+        return
 
+    category = input("Enter category: ").strip().lower()
+    found = False
+
+    # HEADERS (same as view_inventory)
+    print(red + f"{'Item Name':<30}{'Category':<25}"
+          f"{'Quantity':>12}{'Unit Price':>15}{'Reorder Level':>15}" + default)
+    print("_" * 100)
+
+    # FILTERED DISPLAY
     for name, data in system.items():
         if data["Category"].lower() == category:
-            print(name, data)
-            check = True
+            print(f"{name:<30}{data['Category']:<25}"
+                  f"{data['Quantity']:>12}{data['Unit Price']:>15}{data['Reorder Level']:>15}")
+            found = True
 
-    if not check:
+    if not found:
         print("No items found.")
 
 
