@@ -197,16 +197,26 @@ def view_stock_by_category():
 
 # FILTER LOW STOCK
 def view_stock_to_reorder():
-    check = False
+    if not system:
+        print("Inventory empty.")
+        return
 
+    found = False
+
+    # HEADERS
+    print(red + f"{'Item Name':<30}{'Category':<25}"
+          f"{'Quantity':>12}{'Unit Price':>15}{'Reorder Level':>15}" + default)
+    print("_" * 100)
+
+    # FILTER LOW STOCK
     for name, data in system.items():
         if data["Quantity"] <= data["Reorder Level"]:
-            print(name, data)
-            check = True
+            print(f"{name:<30}{data['Category']:<25}"
+                  f"{data['Quantity']:>12}{data['Unit Price']:>15}{data['Reorder Level']:>15}")
+            found = True
 
-    if not check:
+    if not found:
         print("No items need reorder.")
-
 
 # EXIT
 def exit_program():
