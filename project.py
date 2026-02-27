@@ -39,7 +39,7 @@ def save_to_csv():
                 data["Reorder Level"]
             ])
 
-    print("Inventory saved to CSV.")
+    print("Saving inventory to inventory.csv... Done!")
 
 
 # INPUT HELPERS
@@ -170,7 +170,6 @@ def view_stock_to_reorder():
 def exit_program():
     choice = input("Save before exiting? (y/n): ").lower()
     if choice == "y":
-        print("Saving inventory to inventory.csv... Done!")
         save_to_csv()
 
     print("Goodbye.")
@@ -179,8 +178,11 @@ def exit_program():
 # MAIN PROGRAM
 load_from_csv()
 
+purple = "\033[1;35m"
+default = "\033[0m"
+
 while True:
-    print("""
+    print(purple + """
 === Trojan Construction Shop Inventory Tracker ===
 
 1. Add New Item
@@ -191,7 +193,7 @@ while True:
 6. Save to CSV
 7. Load from CSV
 8. Exit
-""")
+""" + default)
 
     choice = input("Enter choice: ")
 
