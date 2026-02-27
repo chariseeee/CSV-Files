@@ -7,7 +7,7 @@ def load_from_csv():
     try: # run the code then except if  error
         with open("inventory.csv", "r") as file: # close after use, r = read, save as file
             reader = csv.DictReader(file)
-            system.clear()
+            system.clear() # refresh your old data
 
             for row in reader: # row means horizontal output
                 system[row["Item"]] = {
@@ -93,19 +93,20 @@ default = "\033[0m"
 
 def view_inventory():
 
-    if not system:
+    if not system: # if there are none found
         print("Inventory empty.")
         return
 
     # HEADERS
-    print(red + f"{'Item Name':<30}{'Category':<25}"
-          f"{'Quantity':<12}{'Unit Price':<15}{'Reorder Level':<15}" + default)
+    # {value:number} number = no. of spaces
+    print(red + f"{'Item Name':<30}{'Category':<25}" # <>^ = align right, left, center
+          f"{'Quantity':>12}{'Unit Price':>15}{'Reorder Level':>15}" + default)
     print("_" * 100)
 
     # KEY VALUES
     for name, data in system.items():
         print(f"{name:<30}{data['Category']:<25}"
-              f"{data['Quantity']:<12}{data['Unit Price']:<15}{data['Reorder Level']:<15}")
+              f"{data['Quantity']:>12}{data['Unit Price']:>15}{data['Reorder Level']:>15}")
 
 
     print("""
